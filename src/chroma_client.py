@@ -50,12 +50,35 @@ def get_chroma_client():
     port = int(os.getenv("CHROMADB_PORT", "8100"))
 
     if not _port_open(host, port):
+        # Emit an actionable hint for native (non-Docker) installs.
+        # OSC 8 hyperlinks render as clickable links in modern terminals
+        # (GNOME Terminal, kitty, iTerm2, Windows Terminal, etc.).
+        _in_docker = os.path.exists("/.dockerenv")
+        if not _in_docker:
+            try:
+                with open("/proc/1/cgroup", "r", encoding="utf-8", errors="ignore") as _fh:
+                    _in_docker = any(m in _fh.read() for m in ("docker", "containerd", "kubepods"))
+            except Exception:
+                pass
+        if not _in_docker:
+            _script = os.path.join(
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                "scripts", "install-chromadb-service.sh",
+            )
+            _link = f"\033]8;;file://{_script}\033\\scripts/install-chromadb-service.sh\033]8;;\033\\"
+            logger.warning(
+                "ChromaDB not reachable at %s:%s — for native installs, set up "
+                "the service with: %s",
+                host, port, _link,
+            )
         raise RuntimeError(
-            f"ChromaDB is not reachable at {host}:{port}. Start the ChromaDB "
-            f"service (e.g. `docker compose up chromadb`) or set CHROMADB_HOST / "
-            f"CHROMADB_PORT to point at a running instance."
+            f"ChromaDB is not reachable at {host}:{port}. "
+            f"Docker users: `docker compose up chromadb`. "
+            f"Native users: run scripts/install-chromadb-service.sh --install "
+            f"or set CHROMADB_HOST / CHROMADB_PORT to point at a running instance."
         )
 
+    # FUTURE(duckdb): swap HttpClient for a DuckDB-based vector backend here
     client = chromadb.HttpClient(host=host, port=port)
 
     # Health check before caching — if the port is open but the service isn't
