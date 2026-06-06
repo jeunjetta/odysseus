@@ -167,6 +167,71 @@ def check_deps():
         print("  [ok] tmux installed")
 
 
+def _systemd_user_available() -> bool:
+    """Return True if systemd --user session is available on this Linux host."""
+    if sys.platform != "linux":
+        return False
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["systemctl", "--user", "status"],
+            capture_output=True, timeout=5
+        )
+        return result.returncode in (0, 3)  # 0=running, 3=degraded but available
+    except Exception:
+        return False
+
+
+def prompt_service_install():
+    """Offer to install ChromaDB (and Odysseus) as systemd user services.
+
+    Only runs on Linux with a live systemd user session and only when
+    stdin is an interactive terminal. Skips silently everywhere else.
+    """
+    if not sys.stdin.isatty():
+        return
+    if not _systemd_user_available():
+        return
+
+    import subprocess
+
+    print()
+    print("6. Service setup (systemd --user)...")
+    print("   Installing as a service means ChromaDB and/or Odysseus")
+    print("   start automatically when you log in — no manual `chroma run` needed.")
+    print()
+
+    script_dir = os.path.join(BASE_DIR, "scripts")
+    chroma_script = os.path.join(script_dir, "install-chromadb-service.sh")
+    odysseus_script = os.path.join(BASE_DIR, "install-service.sh")
+
+    # ChromaDB service
+    ans_chroma = input("   Install ChromaDB as a systemd user service? [y/N] ").strip().lower()
+    if ans_chroma in ("y", "yes"):
+        if os.path.exists(chroma_script):
+            print("   Running install-chromadb-service.sh --install ...")
+            result = subprocess.run(["bash", chroma_script, "--install"], cwd=BASE_DIR)
+            if result.returncode == 0:
+                print("  [ok] ChromaDB service installed")
+            else:
+                print("  [warn] ChromaDB service install returned non-zero — check output above")
+        else:
+            print(f"  [warn] Script not found: {chroma_script}")
+
+    # Odysseus service
+    ans_odysseus = input("   Install Odysseus as a systemd user service? [y/N] ").strip().lower()
+    if ans_odysseus in ("y", "yes"):
+        if os.path.exists(odysseus_script):
+            print("   Running install-service.sh ...")
+            result = subprocess.run(["bash", odysseus_script], cwd=BASE_DIR)
+            if result.returncode == 0:
+                print("  [ok] Odysseus service installed")
+            else:
+                print("  [warn] Odysseus service install returned non-zero — check output above")
+        else:
+            print(f"  [warn] Script not found: {odysseus_script}")
+
+
 def main():
     print("\n=== Odysseus Setup ===\n")
 
@@ -195,6 +260,11 @@ def main():
     except Exception as e:
         print(f"  [warn] Admin creation failed: {e}")
         admin_status = "failed"
+
+    try:
+        prompt_service_install()
+    except Exception as e:
+        print(f"  [warn] Service setup prompt failed: {e}")
 
     print("\n=== Setup complete ===")
     # start-macos.sh launches the server itself (on its own port) right after
