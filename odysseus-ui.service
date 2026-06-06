@@ -1,19 +1,24 @@
-# Copy to /etc/systemd/system/odysseus-ui.service
-# Edit User, WorkingDirectory, and ExecStart paths to match your setup
+# odysseus-ui.service
+# Systemd user unit for the Odysseus AI workspace.
+# install-odysseus-service.sh fills in @@UVICORN_BIN@@, @@REPO_ROOT@@, and
+# @@APP_PORT@@ and installs to ~/.config/systemd/user/. Do NOT edit the
+# installed copy — re-run the script to regenerate it.
+#
+# Manual install:
+#   scripts/install-odysseus-service.sh
+
 [Unit]
-Description=Odysseus UI
+Description=Odysseus AI workspace
 After=network.target odysseus-chromadb.service
 Wants=odysseus-chromadb.service
 
 [Service]
 Type=simple
-# CHANGE THESE to match your user and install path:
-User=YOURUSER
-WorkingDirectory=/home/YOURUSER/odysseus-ui
-ExecStart=/home/YOURUSER/odysseus-ui/venv/bin/uvicorn app:app --port 7000 --host 0.0.0.0
-Restart=always
-RestartSec=3
-EnvironmentFile=-/home/YOURUSER/odysseus-ui/.env
+WorkingDirectory=@@REPO_ROOT@@
+ExecStart=@@UVICORN_BIN@@ app:app --host 127.0.0.1 --port @@APP_PORT@@
+EnvironmentFile=-@@REPO_ROOT@@/.env
+Restart=on-failure
+RestartSec=5
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

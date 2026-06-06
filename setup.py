@@ -203,7 +203,7 @@ def prompt_service_install():
 
     script_dir = os.path.join(BASE_DIR, "scripts")
     chroma_script = os.path.join(script_dir, "install-chromadb-service.sh")
-    odysseus_script = os.path.join(BASE_DIR, "install-service.sh")
+    odysseus_script = os.path.join(script_dir, "install-odysseus-service.sh")
 
     # ChromaDB service
     ans_chroma = input("   Install ChromaDB as a systemd user service? [y/N] ").strip().lower()
