@@ -1,0 +1,21 @@
+# odysseus-chromadb.service
+# Systemd user unit for the ChromaDB vector-store server used by Odysseus.
+# install-chromadb-service.sh fills in @@CHROMA_BIN@@ and @@DATA_DIR@@
+# and installs to ~/.config/systemd/user/. Do NOT edit the installed copy —
+# re-run the script to regenerate it.
+#
+# Manual install:
+#   scripts/install-chromadb-service.sh --install
+
+[Unit]
+Description=ChromaDB vector store (Odysseus companion)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=@@CHROMA_BIN@@ run --host 127.0.0.1 --port 8100 --path @@DATA_DIR@@/chroma
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
