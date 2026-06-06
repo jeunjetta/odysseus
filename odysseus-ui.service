@@ -2,7 +2,8 @@
 # Edit User, WorkingDirectory, and ExecStart paths to match your setup
 [Unit]
 Description=Odysseus UI
-After=network.target
+After=network.target odysseus-chromadb.service
+Wants=odysseus-chromadb.service
 
 [Service]
 Type=simple
