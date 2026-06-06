@@ -222,14 +222,16 @@ def prompt_service_install():
     ans_odysseus = input("   Install Odysseus as a systemd user service? [y/N] ").strip().lower()
     if ans_odysseus in ("y", "yes"):
         if os.path.exists(odysseus_script):
-            print("   Running install-service.sh ...")
-            result = subprocess.run(["bash", odysseus_script], cwd=BASE_DIR)
+            print("   Running install-odysseus-service.sh --install ...")
+            result = subprocess.run(["bash", odysseus_script, "--install"], cwd=BASE_DIR)
             if result.returncode == 0:
                 print("  [ok] Odysseus service installed")
+                return True
             else:
                 print("  [warn] Odysseus service install returned non-zero — check output above")
         else:
             print(f"  [warn] Script not found: {odysseus_script}")
+    return False
 
 
 def main():
@@ -261,15 +263,16 @@ def main():
         print(f"  [warn] Admin creation failed: {e}")
         admin_status = "failed"
 
+    odysseus_service_installed = False
     try:
-        prompt_service_install()
+        odysseus_service_installed = prompt_service_install() or False
     except Exception as e:
         print(f"  [warn] Service setup prompt failed: {e}")
 
     print("\n=== Setup complete ===")
-    # start-macos.sh launches the server itself (on its own port) right after
-    # this, so suppress the manual hint there to avoid a contradictory URL.
-    if not os.getenv("ODYSSEUS_SKIP_RUN_HINT"):
+    # Suppress the manual start hint when Odysseus was just installed as a
+    # service (it's already running), or when start-macos.sh launches it.
+    if not odysseus_service_installed and not os.getenv("ODYSSEUS_SKIP_RUN_HINT"):
         print(f"\nStart the server with:")
         print(f"  python -m uvicorn app:app --host 127.0.0.1 --port 7000")
         print(f"\nThen open http://localhost:7000")
