@@ -5,19 +5,19 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 13061 nodes · 27887 edges · 776 communities (496 shown, 280 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 2015 edges (avg confidence: 0.57)
+- 13061 nodes · 27887 edges · 774 communities (494 shown, 280 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 2017 edges (avg confidence: 0.57)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `361a08e6`
+- Built from commit: `37080975`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - docx.umd.min.js
 - mammoth.browser.min.js
-- app.py
+- McpManager
 - tool_implementations.py
 - core/database.py
 - llm_call_async
@@ -49,7 +49,7 @@
 - panel.js
 - get_setting
 - chat_routes.py
-- session_routes.py
+- test_topic_analyzer.py
 - services/search/core.py
 - isObject
 - ResearchHandler
@@ -103,7 +103,7 @@
 - memory.js
 - test_calendar_owner_scope.py
 - DeepResearcher
-- _build_anthropic_payload
+- test_llm_core_anthropic_temp_clamp.py
 - ui.js
 - markdown.js
 - File
@@ -123,7 +123,7 @@
 - test_auth_regressions.py
 - services/search/__init__.py
 - test_upload_multifile.py
-- _load_for_user
+- SessionManager
 - resolve_endpoint
 - _format_upstream_error
 - webhook_manager.py
@@ -227,7 +227,7 @@
 - test_chat_image_routing.py
 - _classify_endpoint
 - check-docker-gpu.sh
-- test_search_config_provider_key.py
+- get_search_config
 - agent_runs.py
 - test_rag_remove_directory_scope.py
 - loadSessionDocs
@@ -235,14 +235,14 @@
 - _visible_models
 - _find_line_break
 - odysseus-backup
-- extract_quotes
+- extract_statistics
 - test_agent_loop.py
-- src/chat_helpers.py
+- stream_agent_loop
 - scrub_settings
 - assistant.js
 - Core Modules (in static/js/)
 - _renderNotes
-- _checkReminders
+- _flushPendingHighlights
 - find
 - test_llm_core_sse_no_space.py
 - test_session_ghost_delete.py
@@ -254,11 +254,11 @@
 - notEnumerableProp
 - test_gpu_compose_standalone.py
 - TestResearchSessionIdValidation
-- rag_server.py
+- personal_docs.py
 - _export
 - test_email_imap_timeout.py
 - _decode_header
-- personal_routes.py
+- app.py
 - copilot.py
 - strip_thinking
 - censor.js
@@ -266,13 +266,13 @@
 - test_blind_compare_redaction.py
 - test_compare_js.py
 - Odysseus README
-- EditorDraft
+- TimestampMixin
 - test_hwfit_manual_backend.py
 - _match_provider_curated
 - calendar/utils.js
 - _render
 - Spinner
-- resolve
+- _resolve_mcp_oauth_path
 - test_llm_core_temperature.py
 - test_search_content_block_source_index.py
 - _PinnedFakeRequest
@@ -339,7 +339,7 @@
 - test_llm_core_fallback.py
 - test_local_endpoint_api_key_js.py
 - test_research_query_fallback.py
-- test_skill_index_prompt_injection.py
+- search-chat.js
 - package.json
 - test_delete_user_invalidates_token_cache.py
 - _move_email_message
@@ -385,11 +385,11 @@
 - _normalize_model_ids
 - update_database.py
 - _native_quant
-- extract_statistics
-- event_bus.py
+- workspace.js
+- _checkReminders
 - check_readiness
-- rag.js
-- search.js
+- test_archived_sessions_model_filter.py
+- extract_quotes
 - test_agent_rounds_exhausted.py
 - test_document_deeplink.py
 - test_markdown_table_row_js.py
@@ -397,7 +397,7 @@
 - _Predicate
 - _Query
 - test_owned_document_query.py
-- test_rename_user_case_insensitive.py
+- r
 - test_rename_user_token_cache.py
 - _llama_cpp_rebuild_cmd
 - _require_auth
@@ -490,7 +490,7 @@
 - FontWrapper
 - FootnotesWrapper
 - ImportedXmlComponent
-- D
+- XmlAttributeComponent
 - test_calendar_utils_dates_js.py
 - test_censor_pref_js.py
 - test_delete_message_no_session.py
@@ -546,18 +546,18 @@
 - js/package.json
 - AbstractNumbering
 - AbstractNumberingAttributes
-- Alignment
+- Align
 - Anchor
 - AnchorAttributes
-- AnnotationReference
+- AlignmentAttributes
 - AppPropertiesAttributes
 - BaseXmlComponent
 - Begin
 - Blip
-- BlipAttributes
+- AppProperties
 - BookmarkEnd
-- BookmarkStart
-- BorderElement
+- BaseEmphasisMark
+- BlipFill
 - ChangeAttributes
 - CharacterSpacing
 - CheckBoxSymbolElement
@@ -565,31 +565,31 @@
 - ChildNonVisualProperties
 - Color
 - Column
-- ColumnBreak
-- CommentRangeAttributes
-- CommentRangeStart
+- Bookmark
+- Border
+- CarriageReturn
 - CompatibilitySettingAttributes
 - ComponentAttributes
 - ConcreteHyperlink
 - ConcreteNumbering
 - ContentTypeAttributes
-- ContinuationSeperator
-- CoreProperties
+- CheckboxSymbolAttributes
+- CommentAttributes
 - CustomPropertiesAttributes
 - CustomPropertyAttributes
 - CustomPropertyValue
-- DayLong
+- CommentRangeEnd
 - DefaultAttributes
 - DeletedNumberOfPages
-- DeletedNumberOfPagesSection
-- DeletedText
+- CompatibilitySetting
+- ContinuationSeparator
 - DeletedTextRunWrapper
-- DocGridAttributes
-- DocumentAttributes
+- ContinuationSeperatorRun
+- CurrentSection
 - DocumentDefaults
 - DocumentGrid
-- EndnoteReference
-- Extents
+- Default
+- DeletedPage
 - ExternalHyperlink
 - ExternalStylesFactory
 - FidCharAttrs
@@ -625,73 +625,73 @@
 - HorizontalPositionAttributes
 - HpsMeasureElement
 - HyperlinkAttributes
-- HyperlinkStyle
+- DocumentBackgroundAttributes
 - Indent
 - IndentLevel
-- InitializableXmlComponent
-- InternalHyperlink
-- LevelOverrideAttributes
+- EmphasisMark
+- HeaderAttributes
+- LevelOverride
 - ListParagraph
 - MathAccentCharacter
 - MathAccentCharacterAttributes
 - MathAngledBrackets
-- MathBase
+- LevelText
 - MathBeginningCharacter
-- MathBracketProperties
-- MathCurlyBrackets
-- MathDenominator
+- MathBeginningCharacterAttributes
+- MathDegreeHide
+- MathDegreeHideAttributes
 - MathEndingCharacter
 - MathFraction
 - MathFunction
 - MathFunctionName
-- MathFunctionProperties
-- MathIntegral
+- MathEndingCharacterAttributes
+- MathLimitLocationAttributes
 - MathNumerator
 - MathPreSubSuperScriptProperties
 - MathRadical
 - MathRadicalProperties
 - MathRoundBrackets
 - MathRun
-- MathSquareBrackets
+- MathPreSubSuperScript
 - MathSubScript
 - MathSubScriptHide
 - MathSubScriptProperties
 - MathSubSuperScriptProperties
 - MathSum
 - MathSuperScript
-- MathSuperScriptElement
+- MathSubSuperScript
 - MathSuperScriptHide
-- MathSuperScriptProperties
+- MathText
 - MonthLong
 - MonthShort
-- MultiLevelType
-- Name
+- NumAttributes
+- OnOffElement
 - NoBreakHyphen
 - NonVisualPicProperties
 - NonVisualPropertiesAttributes
 - NumberFormat
 - NumberId
 - NumberOfPages
-- NumberOfPagesSection
+- OverrideAttributes
 - NumberProperties
 - NumberValueElement
-- Offset
-- OutlineLevel
-- PageBreakBefore
+- PageBreak
+- PageMargin
+- PageReferenceFieldInstruction
 - PageNumberElement
 - PageNumberType
 - PageNumberTypeAttributes
-- PageReference
+- PositionalTab
 - PageSize
 - PageTextDirection
 - PageTextDirectionAttributes
 - ParagraphPropertiesDefaults
 - Pic
-- PicAttributes
+- Tab
 - PresetGeometry
 - PresetGeometryAttributes
 - Relationship
-- RelationshipAttributes
+- TableCellProperties
 - RelationshipsAttributes
 - Run
 - RunFontAttributes
@@ -720,30 +720,28 @@
 - Styles
 - SubScript
 - SymbolRun
-- TableBorders
+- TableRowHeight
 - TableCellBorders
 - TableCellMargin
-- TableLayout
+- TableWidthElement
 - TableLayoutAttributes
 - TableProperties
-- TableRowProperties
-- TabStop
+- TextAttributes
+- Type
 - TabStopItem
 - TDirection
 - TDirectionAttributes
 - Text
-- ThematicBreak
+- Underline
 - TimestampElement
 - TitleStyle
-- UiPriority
-- VerticalAlignElement
-- VerticalPositionAttributes
+- VerticalMerge
+- WordWrapAttributes
+- WrapSquare
 - WordWrap
-- WrapNone
-- WrapTight
+- WrapTopAndBottom
+- YearLong
 - WrapTightAttributes
-- WrapTopAndBottomAttributes
-- YearShort
 - sw.js
 - test_pip_install_fallback_chain_propagates_failure_in_venv
 - test_pip_install_fallback_chain_tries_user_outside_venv
@@ -791,31 +789,31 @@
 ## Import Cycles
 - None detected.
 
-## Communities (776 total, 280 thin omitted)
+## Communities (774 total, 280 thin omitted)
 
 ### Community 0 - "docx.umd.min.js"
 Cohesion: 0.01
-Nodes (129): AbstractNumId, AdjustmentValues, Align, AlignmentAttributes, AppProperties, Attributes, BaseEmphasisMark, BlipFill (+121 more)
+Nodes (130): AbstractNumId, AdjustmentValues, Alignment, AnnotationReference, Attributes, BlipAttributes, BookmarkStart, BookmarkStartAttributes (+122 more)
 
 ### Community 1 - "mammoth.browser.min.js"
 Cohesion: 0.01
 Nodes (37): cleanUpNextTick(), codePoint(), Context(), createRule(), dec(), domainBind(), drainQueue(), formatNonError() (+29 more)
 
-### Community 2 - "app.py"
-Cohesion: 0.02
-Nodes (130): AbstractEventLoop, AuthMiddleware, get_version(), health_check(), invalid_file_upload_handler(), _is_auth_exempt(), _is_trusted_loopback(), _lifespan() (+122 more)
+### Community 2 - "McpManager"
+Cohesion: 0.03
+Nodes (75): AbstractEventLoop, AuthMiddleware, _BaseHTTPMiddleware, Serve static assets normally, but force the browser to REVALIDATE source files…, _RequestTimeoutMiddleware, _RevalidatingStatic, BaseHTTPMiddleware, mint_token() (+67 more)
 
 ### Community 3 - "tool_implementations.py"
 Cohesion: 0.03
 Nodes (148): Process, agent_tools.py — Facade module. Re-exports tool parsing, schemas, execution,…, Set the global MCP manager instance., set_mcp_manager(), get_task_scheduler(), Return the current task scheduler instance., _build_mcp_args(), _call_mcp_tool() (+140 more)
 
 ### Community 4 - "core/database.py"
-Cohesion: 0.02
-Nodes (136): mint_token(), Create a chat-scoped API token row and return (token_id, raw_token). The raw…, archive_session(), bulk_insert_messages(), cleanup_old_sessions(), get_db(), get_db_session(), get_detailed_stats() (+128 more)
+Cohesion: 0.03
+Nodes (119): archive_session(), bulk_insert_messages(), cleanup_old_sessions(), get_db(), get_db_session(), get_detailed_stats(), get_session_by_id(), get_session_mode() (+111 more)
 
 ### Community 5 - "llm_call_async"
 Cohesion: 0.03
-Nodes (126): _assemble_prompt(), _build_actions_snapshot(), _build_base_prompt(), _build_system_prompt(), _endpoint_lookup_keys(), _extract_last_user_message(), get_builtin_overrides(), _is_ollama_openai_compat_url() (+118 more)
+Nodes (121): AsyncClient, agent_loop.py Streaming agent loop for odysseus-ui. Wraps stream_llm() with…, Fresh-context completion verifier. A second model instance with NO shared…, # IMPORTANT: check type-based events BEFORE "delta" key,, _run_verifier_subagent(), maybe_compact(), context_compactor.py Auto-compacts conversation history when approaching…, Check context usage and compact if above threshold. Returns (messages,… (+113 more)
 
 ### Community 6 - "calendar_routes.py"
 Cohesion: 0.03
@@ -823,11 +821,11 @@ Nodes (121): CalendarCal, CalendarEvent, CalendarCal, CalendarEvent, A calendar 
 
 ### Community 7 - "ChatMessage"
 Cohesion: 0.03
-Nodes (73): ChatMessage, Comparison, Stores A/B model comparison results., ChatMessage, Any, A single chat message., Convert to dict for API responses., Dict-like access for compatibility. (+65 more)
+Nodes (72): ChatMessage, Any, A single chat message., Convert to dict for API responses., Dict-like access for compatibility., A chat session — pure data container., Add a message to this session. Delegates to SessionManager for persistence if…, Get messages in format for LLM API. Slash-command / setup replies are persisted… (+64 more)
 
 ### Community 8 - "model_routes.py"
-Cohesion: 0.04
-Nodes (84): Outgoing webhooks fired on events., Webhook, Find an alternative working endpoint when the current one fails. Returns…, Ensure session has auth headers — resolve from endpoint DB if missing., resolve_session_auth(), _session_url_matches_endpoint(), try_fallback_endpoint(), setup_model_routes() (+76 more)
+Cohesion: 0.03
+Nodes (117): Outgoing webhooks fired on events., Webhook, Find an alternative working endpoint when the current one fails. Returns…, Ensure session has auth headers — resolve from endpoint DB if missing., resolve_session_auth(), _session_url_matches_endpoint(), try_fallback_endpoint(), setup_model_routes() (+109 more)
 
 ### Community 9 - "cookbook.js"
 Cohesion: 0.05
@@ -835,7 +833,7 @@ Nodes (100): _applyServerSelection(), _buildEnvPrefix(), _buildEnvPrefixWindows(
 
 ### Community 10 - "app.js"
 Cohesion: 0.04
-Nodes (84): _createDirectChatFromPreferredModel(), initializeEventListeners(), NOTE: image_gen_enabled only governs *generating* images in chat — the, IMPORTANT: don't overwrite the user's persisted per-mode tool prefs, IMPORTANT: import cookbook.js with NO ?v= query — the same plain specifier, _refreshDefaultChat(), startOdysseusApp(), adminModule (+76 more)
+Nodes (70): _createDirectChatFromPreferredModel(), initializeEventListeners(), NOTE: image_gen_enabled only governs *generating* images in chat — the, IMPORTANT: don't overwrite the user's persisted per-mode tool prefs, IMPORTANT: import cookbook.js with NO ?v= query — the same plain specifier, _refreshDefaultChat(), startOdysseusApp(), adminModule (+62 more)
 
 ### Community 11 - "test_cookbook_helpers.py"
 Cohesion: 0.04
@@ -843,7 +841,7 @@ Nodes (99): _normalize_scopes(), _append_llama_cpp_linux_accel_build_lines(), _a
 
 ### Community 12 - "Session"
 Cohesion: 0.03
-Nodes (85): BaseException, ChatMessage, Note, Check if session is active (not archived), Convert session to dictionary for JSON serialization, A Google Keep-style note or checklist., SQLAlchemy model for ChatMessage table. Represents individual chat messages…, SQLAlchemy model for Session table. Represents a chat session with its… (+77 more)
+Nodes (83): BaseException, ChatMessage, Note, Check if session is active (not archived), Convert session to dictionary for JSON serialization, A Google Keep-style note or checklist., SQLAlchemy model for ChatMessage table. Represents individual chat messages…, SQLAlchemy model for Session table. Represents a chat session with its… (+75 more)
 
 ### Community 13 - "cookbookRunning.js"
 Cohesion: 0.06
@@ -859,15 +857,15 @@ Nodes (93): _8BALL, _ALIAS_MAP, _cmd8Ball(), _cmdAscii(), _cmdColor(), _cmdCompa
 
 ### Community 16 - "require_stream_readable"
 Cohesion: 0.04
-Nodes (81): A(), addErrorHandlerIfEventEmitter(), attrib(), beginWhiteSpace(), c(), charAt(), checkBufferLength(), clearBuffers() (+73 more)
+Nodes (78): A(), addErrorHandlerIfEventEmitter(), attrib(), beginWhiteSpace(), c(), charAt(), checkBufferLength(), clearBuffers() (+70 more)
 
 ### Community 17 - "index.js"
 Cohesion: 0.06
 Nodes (76): getModelCost(), safeDisplayImageSrc(), EVAL_PROMPTS, WAVE_FRAMES, _buildCompareUI(), _buildComparisonMarkdown(), closeCompare(), _closeExportMenu() (+68 more)
 
 ### Community 18 - "test_security_regressions.py"
-Cohesion: 0.03
-Nodes (80): _q(), Quote an IMAP mailbox name. Defensive: escapes `\\` and `"` and wraps in double…, _inprocess_pollers_enabled(), Honour `ODYSSEUS_INPROCESS_POLLERS` — set to `0`/`false`/`no`/`off` to disable…, _apply_mcp_oauth_env(), _mcp_oauth_base_dir(), _mcp_oauth_token_missing(), Path (+72 more)
+Cohesion: 0.04
+Nodes (64): _q(), Quote an IMAP mailbox name. Defensive: escapes `\\` and `"` and wraps in double…, _inprocess_pollers_enabled(), Honour `ODYSSEUS_INPROCESS_POLLERS` — set to `0`/`false`/`no`/`off` to disable…, _drop_route_module_cache(), _import_attachment_extract_dir(), _import_gallery_routes_for_filename(), _import_integrations() (+56 more)
 
 ### Community 19 - "email_routes.py"
 Cohesion: 0.06
@@ -895,7 +893,7 @@ Nodes (46): Execute a built-in action (no LLM needed)., Clean up raw MCP email l
 
 ### Community 25 - "galleryEditor.js"
 Cohesion: 0.04
-Nodes (58): buildMergedMaskCanvas(), buildThumbnail(), gaussianBlur(), motionBlur(), zoomBlur(), edgeFeather(), fxFilterToSlider(), layerFilterString() (+50 more)
+Nodes (53): buildMergedMaskCanvas(), buildThumbnail(), gaussianBlur(), motionBlur(), zoomBlur(), edgeFeather(), fxFilterToSlider(), layerFilterString() (+45 more)
 
 ### Community 26 - "document.js"
 Cohesion: 0.04
@@ -911,7 +909,7 @@ Nodes (61): analyze_image_with_vl(), build_user_content(), _fit_inline_attachmen
 
 ### Community 29 - "_buildEditor"
 Cohesion: 0.05
-Nodes (74): wireInpaintButtons(), wireAIModelSelectors(), wireRembgAndSharpen(), wireAIToolsMisc(), wireCanvasEvents(), drawCheckerboard(), wireClipboardAndDrop(), wireSliderUx() (+66 more)
+Nodes (79): wireInpaintButtons(), wireAIModelSelectors(), wireRembgAndSharpen(), wireAIToolsMisc(), wireCanvasEvents(), drawCheckerboard(), wireClipboardAndDrop(), wireSliderUx() (+71 more)
 
 ### Community 30 - "AuthManager"
 Cohesion: 0.05
@@ -922,20 +920,20 @@ Cohesion: 0.07
 Nodes (70): addToQueue(), adoptSession(), cancelJob(), clearAll(), _connectStream(), _fetchResult(), _finishJob(), formatElapsed() (+62 more)
 
 ### Community 32 - "get_setting"
-Cohesion: 0.04
-Nodes (66): call_tool(), list_tools(), call_tool, list_tools, TextContent, Tool, image_gen_server.py MCP server exposing image generation via OpenAI-compatible…, Resolve (url, model, headers, teacher) for an audit run from Settings. Worker =… (+58 more)
+Cohesion: 0.05
+Nodes (58): call_tool(), list_tools(), call_tool, list_tools, TextContent, Tool, image_gen_server.py MCP server exposing image generation via OpenAI-compatible…, _assemble_prompt() (+50 more)
 
 ### Community 33 - "chat_routes.py"
 Cohesion: 0.05
-Nodes (68): accumulate_token_usage(), add_user_message(), auto_name_session(), build_chat_context(), ChatContext, clean_thinking_for_save(), _enforce_chat_privileges(), extract_preset() (+60 more)
+Nodes (66): accumulate_token_usage(), add_user_message(), auto_name_session(), build_chat_context(), ChatContext, clean_thinking_for_save(), _enforce_chat_privileges(), extract_preset() (+58 more)
 
-### Community 34 - "session_routes.py"
-Cohesion: 0.05
-Nodes (59): APIRouter, History routes — session history, truncation, fork, conversation topics., setup_history_routes(), _content_to_text(), _current_user_is_admin(), _message_role(), _message_text(), _persist_session_headers() (+51 more)
+### Community 34 - "test_topic_analyzer.py"
+Cohesion: 0.12
+Nodes (25): analyze_topics(), Any, Topic analysis for conversations — deduplicated from app.py. Used by…, Scan non-archived sessions and return topic frequency data. If owner is set,…, _build_app_with_loopback_bypass(), _make_session(), Round-4 / Finding A3.1 validator. Claim under test: /api/conversations/topics…, Even if some legacy sessions have NO `owner` key at all (pre-ownership data, or… (+17 more)
 
 ### Community 35 - "services/search/core.py"
 Cohesion: 0.06
-Nodes (62): Any, APIRouter, Request, Search routes — /api/search/config GET, /api/search POST., Accept JSON, form data, or query params for search endpoints. The browser UI…, _request_values(), setup_search_routes(), _build_provider_chain() (+54 more)
+Nodes (55): extract_key_points(), get_tldr(), Pull out bullet-style key points from a block of text., Produce a very short TL;DR by taking the first few sentences., _build_provider_chain(), _call_provider(), invalidate_search_cache(), Core search orchestrators: searxng_search_results, comprehensive_web_search, con (+47 more)
 
 ### Community 36 - "isObject"
 Cohesion: 0.04
@@ -943,7 +941,7 @@ Nodes (64): arrayToHash(), baseCreate(), canAttachTrace(), castPreservingDisposa
 
 ### Community 37 - "ResearchHandler"
 Cohesion: 0.05
-Nodes (32): Get current research status for a session., Cancel running research for a session., Get the completed research result., Get deduplicated source list from research findings., Extract deduplicated [{url, title}] from findings, filtering low-quality ones., Remove persisted result after it's been consumed., Persist completed research result to disk., Run iterative deep research using the LLM-in-the-loop DeepResearcher.          A (+24 more)
+Nodes (32): Get current research status for a session., Cancel running research for a session., Get the completed research result., Get deduplicated source list from research findings., Extract deduplicated [{url, title}] from findings, filtering low-quality ones., Remove persisted result after it's been consumed., Persist completed research result to disk., Run iterative deep research using the LLM-in-the-loop DeepResearcher. Args:… (+24 more)
 
 ### Community 38 - "theme.js"
 Cohesion: 0.06
@@ -978,16 +976,16 @@ Cohesion: 0.06
 Nodes (38): PackageUpdateStatus, _generate_pty(), _package_installed_from_probe(), _package_pip_update_status(), _package_probe_script(), _package_status_note(), _pip_dist_name(), _prepend_user_install_bins_to_path() (+30 more)
 
 ### Community 46 - "PersonalDocsManager"
-Cohesion: 0.06
-Nodes (38): extract_office_text(), load_personal_index(), PersonalDocsConfig, PersonalDocsManager, Any, Retrieve relevant documents using keyword search. Args: personal_index: The…, Retrieve relevant personal documents using vector search first, falling back to…, Manager class for personal document indexing and retrieval. (+30 more)
+Cohesion: 0.07
+Nodes (29): call_tool(), _ensure_init(), list_tools(), call_tool, list_tools, TextContent, Tool, rag_server.py MCP server exposing RAG document management (list, add_directory,… (+21 more)
 
 ### Community 47 - "load_script"
 Cohesion: 0.08
 Nodes (36): load_script(), Shared loader for CLI scripts under scripts/., Load a script from scripts/ by name and return it as a module. The module name…, make_core_db_stub(), Shared database stub helpers for CLI and unit tests., Create a core.database stub and inject it via monkeypatch. Always sets…, test_calendar_name_handles_missing_relation(), test_state_set_rejects_non_object_json() (+28 more)
 
 ### Community 48 - "app_initializer.py"
-Cohesion: 0.06
-Nodes (39): Set the global session manager reference., set_session_manager(), create_directories(), initialize_managers(), Any, Create necessary directories if they don't exist., Initialize all manager and handler instances. Args: base_dir: Base directory…, ChatHandler (+31 more)
+Cohesion: 0.05
+Nodes (55): Set the global session manager reference., set_session_manager(), create_directories(), initialize_managers(), Any, Create necessary directories if they don't exist., Initialize all manager and handler instances. Args: base_dir: Base directory…, ChatHandler (+47 more)
 
 ### Community 49 - "test_api_chat_security.py"
 Cohesion: 0.06
@@ -995,7 +993,7 @@ Nodes (29): _blocked_ip(), _host_resolves_publicly(), is_public_http_url(), _Bas
 
 ### Community 50 - "html2pdf.bundle.min.js"
 Cohesion: 0.09
-Nodes (52): at(), B(), be(), Cr(), ct(), d(), De(), dt() (+44 more)
+Nodes (44): at(), B(), be(), Cr(), ct(), De(), dt(), Er() (+36 more)
 
 ### Community 51 - "GalleryImage"
 Cohesion: 0.07
@@ -1022,12 +1020,12 @@ Cohesion: 0.10
 Nodes (50): _activeTags, _albums, _albumSelected, _bulkDeleteAlbums(), _bulkUpload(), closeGallery(), _computeFetchLimit(), _deleteImage() (+42 more)
 
 ### Community 57 - "get_current_user"
-Cohesion: 0.08
-Nodes (40): AsyncClient, Odysseus companion bridge — additive LAN endpoints. Read endpoints…, APIRouter, Companion bridge — /api/companion/*. A thin, additive layer so a LAN client…, setup_companion_routes(), ModelEndpoint, Admin-configured model endpoints. Models are auto-discovered via /v1/models., Raise 403 if the current user isn't an admin. Allows access when auth is… (+32 more)
+Cohesion: 0.05
+Nodes (64): Odysseus companion bridge — additive LAN endpoints. Read endpoints…, APIRouter, Companion bridge — /api/companion/*. A thin, additive layer so a LAN client…, setup_companion_routes(), ModelEndpoint, Admin-configured model endpoints. Models are auto-discovered via /v1/models., Raise 403 if the current user isn't an admin. Allows access when auth is…, # NOTE: `style-src 'unsafe-inline'` is intentionally retained. (+56 more)
 
 ### Community 58 - "TTSService"
 Cohesion: 0.07
-Nodes (20): get_stt_service(), Any, Multi-provider STT service.      Reads provider config from data/settings.json o, STTService, get_tts_service(), _KokoroPipeline, Any, Parse the stored tts_speed defensively. The settings layer tolerates     corrupt (+12 more)
+Nodes (20): get_stt_service(), Any, Multi-provider STT service. Reads provider config from data/settings.json on…, STTService, get_tts_service(), _KokoroPipeline, Any, Parse the stored tts_speed defensively. The settings layer tolerates… (+12 more)
 
 ### Community 59 - "keys"
 Cohesion: 0.06
@@ -1058,16 +1056,16 @@ Cohesion: 0.06
 Nodes (36): Setup cleanup-related routes. Args: session_manager: SessionManager instance…, setup_cleanup_routes(), _apply_owner_filter(), archive_inactive_sessions(), cleanup_old_sessions(), cleanup_sessions(), get_cleanup_preview(), datetime (+28 more)
 
 ### Community 66 - "fit.py"
-Cohesion: 0.09
-Nodes (42): analyze_model(), _architecture_bonus(), _context_score(), _estimate_speed(), _fit_score(), _quality_score(), _quant_bits(), Try a specific quant at a given context. Returns (run_mode, quant, ctx, mem) or (+34 more)
+Cohesion: 0.10
+Nodes (38): analyze_model(), _architecture_bonus(), _context_score(), _estimate_speed(), _fit_score(), _quality_score(), _quant_bits(), Try a specific quant at a given context. Returns (run_mode, quant, ctx, mem) or… (+30 more)
 
 ### Community 67 - "chatRenderer.js"
 Cohesion: 0.08
 Nodes (44): hasActiveStream(), _renderCancelledBubble(), resumeStream(), addMessage(), _appendContinuePrompt(), appendReportButton(), applyModelColor(), _attachIcon() (+36 more)
 
 ### Community 68 - "group.js"
-Cohesion: 0.07
-Nodes (37): chatRenderer, _abortControllers, _getCharacterList(), groupModule, _groupParticipants, init(), _initGroupTab(), _models (+29 more)
+Cohesion: 0.08
+Nodes (36): chatRenderer, _abortControllers, _getCharacterList(), groupModule, _groupParticipants, init(), _initGroupTab(), _models (+28 more)
 
 ### Community 69 - "modalManager.js"
 Cohesion: 0.09
@@ -1086,8 +1084,8 @@ Cohesion: 0.06
 Nodes (28): Ae(), An(), at(), Bn(), Bt(), Cn(), En(), F() (+20 more)
 
 ### Community 73 - "MemoryManager"
-Cohesion: 0.07
-Nodes (25): Compatibility import for the canonical memory manager.  Historically this packag, get_text_similarity(), MemoryManager, Create memory file if it doesn't exist., Load all memory entries from JSON file (unfiltered)., Load memory entries, optionally filtered by owner., Assign all ownerless memory entries to the given owner., Simple tokenizer that splits on whitespace and removes punctuation. (+17 more)
+Cohesion: 0.05
+Nodes (34): Compatibility import for the canonical memory manager. Historically this…, get_text_similarity(), MemoryManager, Create memory file if it doesn't exist., Load all memory entries from JSON file (unfiltered)., Load memory entries, optionally filtered by owner., Assign all ownerless memory entries to the given owner., Simple tokenizer that splits on whitespace and removes punctuation. (+26 more)
 
 ### Community 74 - "estimate_tokens"
 Cohesion: 0.07
@@ -1103,11 +1101,11 @@ Nodes (32): owner_can_see(), Request, The real owner to attribute a request to, 
 
 ### Community 77 - "rank_models"
 Cohesion: 0.08
-Nodes (40): setup_hwfit_routes(), rank_models(), Rank all models against detected hardware. Returns sorted list of fit results., get_models(), model_catalog_path(), _cuda_system(), AMD ROCm support for Cookbook hardware-fit. Consumer AMD Radeon (RDNA:…, Calibration guard: a small MoE fully on a 9060 XT at Q4 should estimate in a… (+32 more)
+Nodes (40): setup_hwfit_routes(), rank_models(), Rank all models against detected hardware. Returns sorted list of fit results.…, get_models(), model_catalog_path(), _cuda_system(), AMD ROCm support for Cookbook hardware-fit. Consumer AMD Radeon (RDNA:…, Calibration guard: a small MoE fully on a 9060 XT at Q4 should estimate in a… (+32 more)
 
 ### Community 78 - "notes.js"
-Cohesion: 0.07
-Nodes (36): _advanceRecurring(), _agentSolveNote(), _beginChecklistGrab(), _beginGrab(), _bindLongPressDrag(), _clearNotesSnapStyles(), COLOR_HEX, _commitNoteReorder() (+28 more)
+Cohesion: 0.08
+Nodes (32): _agentSolveNote(), _beginChecklistGrab(), _beginGrab(), _bindLongPressDrag(), _clearNotesSnapStyles(), COLOR_HEX, _commitNoteReorder(), _copyNote() (+24 more)
 
 ### Community 79 - "services/search/content.py"
 Cohesion: 0.09
@@ -1122,8 +1120,8 @@ Cohesion: 0.06
 Nodes (41): arrayIncludes(), BodyReader(), collapse(), collapseAlternateContent(), collapseElement(), collapseNode(), createBodyReader(), deferredConversion() (+33 more)
 
 ### Community 82 - "services/search/query.py"
-Cohesion: 0.08
-Nodes (34): _boost_entities_in_query(), build_enhanced_query(), _cache_duration_for_query(), _detect_question_type(), enhance_query(), _extract_entities(), _extract_site_filter(), _is_news_query() (+26 more)
+Cohesion: 0.09
+Nodes (31): _boost_entities_in_query(), build_enhanced_query(), _detect_question_type(), enhance_query(), _extract_entities(), _extract_site_filter(), _is_news_query(), Query enhancement, entity extraction, and cache duration helpers. (+23 more)
 
 ### Community 83 - "calendar.js"
 Cohesion: 0.08
@@ -1145,9 +1143,9 @@ Nodes (20): _calendar(), _CalendarCal, _CalendarEvent, _Column, _event(), _Expr,
 Cohesion: 0.09
 Nodes (19): DeepResearcher, Iterative research engine following the IterResearch pattern. Each round: LLM…, Request cooperative cancellation of the research loop., Run iterative research and return a final report. Args: question: The research…, Call the LLM asynchronously and strip thinking tags., LLM analyzes the question and creates a research plan., Fast LLM call to classify the research question into a category., Search each query and extract relevant info from top results. (+11 more)
 
-### Community 88 - "_build_anthropic_payload"
-Cohesion: 0.08
-Nodes (35): _as_content_blocks(), _build_anthropic_payload(), _convert_openai_content_to_anthropic(), Convert OpenAI multimodal content blocks to Anthropic format. Converts…, Convert OpenAI-style messages to Anthropic format., Coerce a message `content` into a list of content blocks. A list (multimodal:…, Strip Odysseus-only metadata before sending messages to providers. Per the…, _sanitize_llm_messages() (+27 more)
+### Community 88 - "test_llm_core_anthropic_temp_clamp.py"
+Cohesion: 0.48
+Nodes (6): Regression guard for #1615 — Anthropic temperature must be clamped to [0.0,…, _temp(), test_above_range_is_clamped_to_one(), test_below_range_is_clamped_to_zero(), test_in_range_is_unchanged(), test_none_is_passed_through_unchanged()
 
 ### Community 89 - "ui.js"
 Cohesion: 0.08
@@ -1183,15 +1181,15 @@ Nodes (36): el(), esc(), featureLabels, initAddUser(), initAll(), initBackup(), 
 
 ### Community 97 - "SkillsManager"
 Cohesion: 0.13
-Nodes (14): Nightly audit pass. Audits the LEAST-recently-audited skills first and caps the…, run_scheduled_skill_audit(), Skill, Record the last test/audit result for a skill in the usage sidecar         (so i, Record the advisory 'is this skill necessary?' judgment in the usage         sid, Assign legacy/unclaimed skill files to the primary owner.          Skills are di, Return every skill as a plain dict, plus any legacy JSON entries., `skill_id` is the slug name. Allows updating any field plus         renames if ` (+6 more)
+Nodes (14): Nightly audit pass. Audits the LEAST-recently-audited skills first and caps the…, run_scheduled_skill_audit(), Skill, Record the last test/audit result for a skill in the usage sidecar (so it…, Record the advisory 'is this skill necessary?' judgment in the usage sidecar.…, Assign legacy/unclaimed skill files to the primary owner. Skills are disk-…, Return every skill as a plain dict, plus any legacy JSON entries., `skill_id` is the slug name. Allows updating any field plus renames if `name`… (+6 more)
 
 ### Community 98 - "test_model_routes.py"
 Cohesion: 0.13
 Nodes (31): _clear_endpoint_settings_for_endpoint(), _clear_speech_settings_for_endpoint(), _clear_user_pref_endpoint_refs(), _endpoint_settings_using_endpoint(), Remove endpoint references from scoped or legacy-flat user preferences., Return speech settings that reference a model endpoint., Reset speech settings that reference a model endpoint., Return labels for settings and fallback chains that reference an endpoint. (+23 more)
 
 ### Community 99 - "memory_extractor.py"
-Cohesion: 0.09
-Nodes (30): audit_memories(), _clean_memory_value(), extract_and_store(), _fallback_memory_candidates(), _fingerprint_entries(), _is_text_duplicate(), _load_tidy_state(), _memory_dicts() (+22 more)
+Cohesion: 0.15
+Nodes (21): audit_memories(), _clean_memory_value(), extract_and_store(), _fallback_memory_candidates(), _fingerprint_entries(), _is_text_duplicate(), _load_tidy_state(), _memory_dicts() (+13 more)
 
 ### Community 100 - "generate_visual_report"
 Cohesion: 0.09
@@ -1218,20 +1216,20 @@ Cohesion: 0.09
 Nodes (33): SetOpenRegistrationRequest, _auth_regressions_stubs(), _auth_route_endpoint(), _build_research_router(), _ensure_stub(), _fake_auth_request(), _fake_request(), fixture (+25 more)
 
 ### Community 106 - "services/search/__init__.py"
-Cohesion: 0.08
-Nodes (27): NetworkError, ParseError, Exception, Base class for all search-engine related errors., Raised when a network request fails (e.g., timeout, DNS error)., Raised when HTML or other content cannot be parsed., SearchEngineError, extract_key_points() (+19 more)
+Cohesion: 0.09
+Nodes (23): NetworkError, ParseError, Exception, Base class for all search-engine related errors., Raised when a network request fails (e.g., timeout, DNS error)., Raised when HTML or other content cannot be parsed., SearchEngineError, comprehensive_web_search() (+15 more)
 
 ### Community 107 - "test_upload_multifile.py"
 Cohesion: 0.10
 Nodes (31): _build_upload_id(), count_recent_uploads(), is_valid_upload_id(), Return True when *upload_id* matches the canonical uploads.json id format., Build a unique upload id whose extension matches UPLOAD_ID_RE. secure_filename…, Number of upload events in *timestamps* within the last *window* seconds. Used…, parametrize, Upload ids must satisfy UPLOAD_ID_RE for every accepted filename.… (+23 more)
 
-### Community 108 - "_load_for_user"
-Cohesion: 0.10
-Nodes (28): APIRouter, Backup routes — export/import user data (memories, presets, settings, skills,…, setup_backup_routes(), _load_for_user(), User preferences API — per-user key/value store backed by a JSON file., Load preferences for a specific user., Save preferences for a specific user., _save_for_user() (+20 more)
+### Community 108 - "SessionManager"
+Cohesion: 0.06
+Nodes (30): ChatMessage, Comparison, Stores A/B model comparison results., _parse_msg_content(), Build a Session with empty history. `get_session` will hydrate messages from…, Convert a database session to a Session object., Add a message to a session and persist to database. Args: session_id: Session…, Persist a single message to the database. (+22 more)
 
 ### Community 109 - "resolve_endpoint"
-Cohesion: 0.09
-Nodes (24): _pick_endpoint_for_sort(), SessionManager, Pick model endpoint for auto-sort LLM call — uses utility endpoint setting,…, Setup session routes with the provided manager and config, setup_session_routes(), Resolve an endpoint/model from settings, with fallback. Args: setting_prefix:…, resolve_endpoint(), Run session cleanup + (optional) AI folder sort for the given owner. Args:… (+16 more)
+Cohesion: 0.10
+Nodes (21): _pick_endpoint_for_sort(), Pick model endpoint for auto-sort LLM call — uses utility endpoint setting,…, Resolve an endpoint/model from settings, with fallback. Args: setting_prefix:…, resolve_endpoint(), Run session cleanup + (optional) AI folder sort for the given owner. Args:…, run_auto_sort(), Shared resolver for background-task AI endpoint (auto-naming, memory, sorting)., Return (endpoint_url, model, headers) for background tasks. Reads… (+13 more)
 
 ### Community 110 - "_format_upstream_error"
 Cohesion: 0.10
@@ -1278,8 +1276,8 @@ Cohesion: 0.14
 Nodes (12): _ping_endpoint(), _probe_single_model(), Send a realistic completion request to a single model. Returns {status,…, Reachability probe that does not require installed/listed models., _patch_resolve(), Endpoint probing behaviour (REAL routes.model_routes helpers). ROADMAP "Backend…, Neutralize DNS/Tailscale resolution and base normalization., Build an httpx.Response with a request attached (so raise_for_status works). (+4 more)
 
 ### Community 121 - "skills_routes.py"
-Cohesion: 0.10
-Nodes (29): _apply_skill_md(), _audit_auto_publish_policy(), _audit_finalize_status(), _audit_flag_text(), _audit_generic_blocker(), _audit_one_skill(), _eval_skill_necessity(), _eval_skill_retrieval_precision() (+21 more)
+Cohesion: 0.09
+Nodes (33): _apply_skill_md(), _audit_auto_publish_policy(), _audit_finalize_status(), _audit_flag_text(), _audit_generic_blocker(), _audit_one_skill(), _eval_skill_necessity(), _eval_skill_retrieval_precision() (+25 more)
 
 ### Community 122 - "odysseus-cookbook"
 Cohesion: 0.11
@@ -1287,15 +1285,15 @@ Nodes (30): ArgumentParser, _build_parser(), cmd_cached(), cmd_download(), cmd_g
 
 ### Community 123 - "test_search_ranking_recency.py"
 Cohesion: 0.11
-Nodes (24): datetime, rank_search_results(), Search result ranking based on relevance, source quality, and recency., Naive UTC 'now'. Matches the naive, UTC-style published dates parsed below,, Score how recent a result is: 1.0 for <=7 days old, 0.0 for >=30 days.      The, Rank search results by title relevance, snippet quality, domain authority, and r, recency_score(), _utcnow_naive() (+16 more)
+Nodes (24): datetime, rank_search_results(), Search result ranking based on relevance, source quality, and recency., Naive UTC 'now'. Matches the naive, UTC-style published dates parsed below, and…, Score how recent a result is: 1.0 for <=7 days old, 0.0 for >=30 days. The age…, Rank search results by title relevance, snippet quality, domain authority, and…, recency_score(), _utcnow_naive() (+16 more)
 
 ### Community 124 - "emailLibrary/utils.js"
 Cohesion: 0.14
 Nodes (29): _bubblesDisabled(), _foldQuotedReplies(), _meEmailAddrs(), _renderEmailBody(), _renderPlaintextThread(), _renderThreadStructure(), _renderTurnsAsBubbles(), _renderTurnsFromServer() (+21 more)
 
 ### Community 125 - ".push"
-Cohesion: 0.11
-Nodes (26): addField(), BookmarkEndAttributes, hasContent(), hasContentCompact(), manipulateAttributes(), nativeType(), onCdata(), onComment() (+18 more)
+Cohesion: 0.06
+Nodes (37): addField(), BookmarkEndAttributes, Compiler, create_indent(), element(), escapeForXML$1(), Formatter, h2() (+29 more)
 
 ### Community 126 - "diffusion_server.py"
 Cohesion: 0.11
@@ -1323,7 +1321,7 @@ Nodes (24): _Mgr, _request(), test_require_privilege_still_blocks_disallowed(), 
 
 ### Community 132 - "strip_think"
 Cohesion: 0.11
-Nodes (24): _has_duplicate_title(), maybe_extract_skill(), skill_extractor.py  Background auto-extraction of skills from complex agent runs, Extract a skill if the agent run was complex enough., _skill_dicts(), action_classify_events(), action_learn_sender_signatures(), Hybrid classification of upcoming calendar events: fast heuristic for obvious… (+16 more)
+Nodes (24): _has_duplicate_title(), maybe_extract_skill(), skill_extractor.py Background auto-extraction of skills from complex agent…, Extract a skill if the agent run was complex enough., _skill_dicts(), action_classify_events(), action_learn_sender_signatures(), Hybrid classification of upcoming calendar events: fast heuristic for obvious… (+16 more)
 
 ### Community 133 - "is_low_quality"
 Cohesion: 0.11
@@ -1358,12 +1356,12 @@ Cohesion: 0.11
 Nodes (23): check_outbound_url(), _classify(), _default_resolver(), _BaseAddress, Outbound URL safety checks (SSRF hardening). Run before the server makes a…, Resolve a hostname to the list of IP strings it maps to (A + AAAA)., Return a rejection reason for an IP, or None if it is allowed., Validate a user-supplied outbound URL. Returns ``(ok, reason)``. ``ok`` is True… (+15 more)
 
 ### Community 141 - "highlight.min.js"
-Cohesion: 0.15
-Nodes (24): V(), a(), b(), c(), d(), e(), f(), g() (+16 more)
+Cohesion: 0.12
+Nodes (25): V(), a(), b(), c(), d(), e(), f(), g() (+17 more)
 
 ### Community 142 - "e"
-Cohesion: 0.29
-Nodes (28): a(), C(), Ce(), Dr(), e(), f(), g(), gr() (+20 more)
+Cohesion: 0.24
+Nodes (36): a(), C(), Ce(), d(), Dr(), e(), f(), Fe() (+28 more)
 
 ### Community 143 - "fromObject"
 Cohesion: 0.10
@@ -1401,10 +1399,6 @@ Nodes (19): createAdjPopupSystem(), drawHistogram(), applyAdjustment(), renderLa
 Cohesion: 0.14
 Nodes (25): requireAvailableTypedArrays(), requireCallBind(), requireCallBound(), requireDefineDataProperty(), requireForEach(), requireFunctionBind(), requireGetIntrinsic(), requireGopd() (+17 more)
 
-### Community 152 - "o"
-Cohesion: 0.11
-Nodes (4): l, o, r, je()
-
 ### Community 153 - "_Query"
 Cohesion: 0.11
 Nodes (11): _Column, _Db, _Document, _install_database_stub(), _Query, test_manage_documents_list_filters_to_calling_owner(), test_manage_documents_read_filters_to_calling_owner(), test_owned_document_query_filters_to_owner() (+3 more)
@@ -1419,7 +1413,7 @@ Nodes (23): _cached_model_ids(), _effective_endpoint_kind(), _endpoint_kind(), _
 
 ### Community 156 - "cli.py"
 Cohesion: 0.11
-Nodes (23): common_parser(), emit(), fail(), ArgumentParser, quiet_logs(), scripts/_lib/cli.py — shared scaffolding for the `odysseus-*` CLIs.  Each top-le, Parse args, dispatch to `args.func(args)`, return an exit code.     Catches Keyb, Force the root logger down to WARNING (overridable via     LOG_LEVEL=...). Call (+15 more)
+Nodes (23): common_parser(), emit(), fail(), ArgumentParser, quiet_logs(), scripts/_lib/cli.py — shared scaffolding for the `odysseus-*` CLIs. Each top-…, Parse args, dispatch to `args.func(args)`, return an exit code. Catches…, Force the root logger down to WARNING (overridable via LOG_LEVEL=...). Call… (+15 more)
 
 ### Community 157 - "i"
 Cohesion: 0.17
@@ -1466,8 +1460,8 @@ Cohesion: 0.15
 Nodes (21): ArgumentParser, _build_parser(), cmd_accounts(), cmd_folders(), cmd_list(), cmd_poll_scheduled(), cmd_poll_summary(), cmd_read() (+13 more)
 
 ### Community 168 - "compute_serve_profiles"
-Cohesion: 0.15
-Nodes (22): compute_serve_profiles(), Return a list of profile dicts for llama.cpp serving of `model` on `system`., Intelligent llama.cpp serve profiles computed from hardware. Locks in that…, A 35B MoE can't hold its weights on 16 GB, so the Quality profile must offload…, Every profile's VRAM estimate must fit the detected card., A model whose weights fit must NOT offload — n_cpu_moe == 0 everywhere., Speed trades quant/context for less offload than Quality., Each profile must carry the concrete llama.cpp flags the cmd builder needs. (+14 more)
+Cohesion: 0.13
+Nodes (26): compute_serve_profiles(), _cpu_moe_for_budget(), VRAM for the full weights. When fixed_gb is given (serving a specific GGUF file…, How many MoE layers must move to CPU so weights+KV fit vram_budget_gb. Returns…, Return a list of profile dicts for llama.cpp serving of `model` on `system`.…, _weights_gb(), Intelligent llama.cpp serve profiles computed from hardware. Locks in that…, A 35B MoE can't hold its weights on 16 GB, so the Quality profile must offload… (+18 more)
 
 ### Community 169 - "VectorRAG"
 Cohesion: 0.15
@@ -1518,8 +1512,8 @@ Cohesion: 0.14
 Nodes (16): addFiles(), clearPending(), _createChip(), fileHandlerModule, getPendingInfo(), _getPreviewUrl(), _lastUploadedMeta, pendingFiles (+8 more)
 
 ### Community 181 - "openPanel"
-Cohesion: 0.14
-Nodes (22): _clearViewedReminderGlows(), _closeMobileFullscreenEdit(), closePanel(), _deleteNote(), _deleteNoteApi(), _ensureNotesChipRegistered(), _enterSelectMode(), _exitSelectMode() (+14 more)
+Cohesion: 0.16
+Nodes (20): _clearViewedReminderGlows(), _closeMobileFullscreenEdit(), closePanel(), _deleteNote(), _deleteNoteApi(), _ensureNotesChipRegistered(), _enterSelectMode(), _exitSelectMode() (+12 more)
 
 ### Community 182 - "_renderMainView"
 Cohesion: 0.16
@@ -1641,9 +1635,9 @@ Nodes (5): _classify_endpoint(), Return 'local' if the endpoint URL points to a 
 Cohesion: 0.33
 Nodes (17): _check_docker(), _check_gpu_passthrough(), _check_nvidia_smi(), _confirm(), _debian_install_steps(), _enable_nvidia_overlay(), _fail(), _info() (+9 more)
 
-### Community 212 - "test_search_config_provider_key.py"
-Cohesion: 0.13
-Nodes (17): _is_secret_key(), True for config keys that hold a credential (e.g. ``brave_api_key``)., Merge non-secret search config into SEARCH_CONFIG.      Provider API keys are in, update_search_config(), fixture, Regression guard for #1661 — GET /api/search/config must not leak API keys.…, stub_settings(), test_get_search_config_never_returns_a_secret() (+9 more)
+### Community 212 - "get_search_config"
+Cohesion: 0.08
+Nodes (31): Any, APIRouter, Request, Search routes — /api/search/config GET, /api/search POST., Accept JSON, form data, or query params for search endpoints. The browser UI…, _request_values(), setup_search_routes(), get_search_config() (+23 more)
 
 ### Community 213 - "agent_runs.py"
 Cohesion: 0.14
@@ -1673,17 +1667,17 @@ Nodes (7): _find_line_break(), Find next line terminator in buffer. Returns (ind
 Cohesion: 0.20
 Nodes (17): _build_parser(), cmd_list(), cmd_restore(), cmd_snapshot(), cmd_verify(), _extract_restore_members(), Path, List entries in `backups/`. Most recent first. (+9 more)
 
-### Community 220 - "extract_quotes"
+### Community 220 - "extract_statistics"
 Cohesion: 0.15
-Nodes (15): extract_quotes(), Return quoted excerpts that are at least 15 characters long., Compatibility wrapper for the canonical services.search.content module.  ``src.s, Compatibility wrapper for the canonical services.search.content module.…, Tests for extract_quotes (src/search/content.py)., test_matched_double_quotes(), test_matched_single_quotes(), test_mismatched_quotes_are_not_extracted() (+7 more)
+Nodes (15): extract_statistics(), Find numbers, percentages, dates and simple measurements., Compatibility wrapper for the canonical services.search.content module.  ``src.s, Compatibility wrapper for the canonical services.search.content module.…, Tests for extract_statistics (src/search/content.py)., test_captures_comma_less_large_number(), test_comma_grouped_number(), test_four_digit_year_captured() (+7 more)
 
 ### Community 221 - "test_agent_loop.py"
 Cohesion: 0.17
 Nodes (7): _append_tool_results(), Append tool execution results back into the message history for the next LLM…, Tests for agent_loop.py — _detect_admin_intent, _compute_final_metrics, and…, After a native tool call with no prose, the assistant message's content must be…, Gemini 3 returns an opaque thought_signature (in extra_content) with each…, TestAppendToolResultsNativeContent, TestAppendToolResultsThoughtSignature
 
-### Community 222 - "src/chat_helpers.py"
-Cohesion: 0.18
-Nodes (16): _is_local_host(), is_vision_model(), lmstudio_supports_vision(), model_supports_vision(), _probe_lmstudio_models(), Read `model`'s capabilities.vision flag from LM Studio, or None when the…, Whether a model accepts images, using the endpoint's reported capability when…, Best-effort check of whether a model can natively accept images. Decides… (+8 more)
+### Community 222 - "stream_agent_loop"
+Cohesion: 0.07
+Nodes (29): _build_actions_snapshot(), _endpoint_lookup_keys(), _is_ollama_openai_compat_url(), _load_mcp_disabled_map(), Choose native function calls or fenced code block parsing. Returns…, Compact record of what the agent actually did this turn, for the verifier to…, Streaming agent loop generator. Yields SSE events: - data: {"delta": "text"}…, Load per-server disabled tool sets from the database. (+21 more)
 
 ### Community 223 - "scrub_settings"
 Cohesion: 0.20
@@ -1698,12 +1692,12 @@ Cohesion: 0.11
 Nodes (17): 10. **search.js**, 11. **chat.js** ⭐ (The Big One), 1. **ui.js**, 2. **markdown.js**, 3. **sessions.js**, 4. **memory.js**, 5. **fileHandler.js**, 6. **voiceRecorder.js** (+9 more)
 
 ### Community 226 - "_renderNotes"
-Cohesion: 0.20
-Nodes (18): _animateReflow(), _applyMasonry(), _captureCardPositions(), _clearPastReminders(), _formatDueDate(), _formatReminderTag(), _goalProgress(), _hasTimeComponent() (+10 more)
+Cohesion: 0.16
+Nodes (22): _animateReflow(), _applyMasonry(), _captureCardPositions(), _clearPastReminders(), _countFiredReminders(), dismissFiredReminderDot(), _formatDueDate(), _formatReminderTag() (+14 more)
 
-### Community 227 - "_checkReminders"
-Cohesion: 0.14
-Nodes (18): _checkReminders(), _countFiredReminders(), dismissFiredReminderDot(), _fireReminder(), _flushPendingHighlights(), _hasActiveReminder(), _hasItems(), _initReminders() (+10 more)
+### Community 227 - "_flushPendingHighlights"
+Cohesion: 0.22
+Nodes (11): _fireReminder(), _flushPendingHighlights(), _hasActiveReminder(), _hasItems(), _loadGlowedReminders(), _loadPendingHighlights(), _queuePendingHighlight(), _saveActiveHighlights() (+3 more)
 
 ### Community 228 - "find"
 Cohesion: 0.18
@@ -1749,9 +1743,9 @@ Nodes (16): base(), _deep_merge(), _load(), _merge_overlay_into_base(), fixture,
 Cohesion: 0.12
 Nodes (3): Regression tests: research session_id must reject path-traversal sequences., Validate the regex used to guard research session_id path params., TestResearchSessionIdValidation
 
-### Community 239 - "rag_server.py"
-Cohesion: 0.16
-Nodes (13): call_tool(), _ensure_init(), list_tools(), call_tool, list_tools, TextContent, Tool, rag_server.py MCP server exposing RAG document management (list, add_directory,… (+5 more)
+### Community 239 - "personal_docs.py"
+Cohesion: 0.11
+Nodes (22): extract_office_text(), load_personal_index(), PersonalDocsConfig, Retrieve relevant documents using keyword search. Args: personal_index: The…, Retrieve relevant personal documents using vector search first, falling back to…, Extract text from an Office/EPUB doc via the optional markitdown dep. Returns…, Retrieve relevant documents for a query., Configuration for personal documents management. (+14 more)
 
 ### Community 240 - "_export"
 Cohesion: 0.22
@@ -1765,9 +1759,9 @@ Nodes (9): _coerce_imap_timeout_seconds(), _open_imap_connection(), Open an IMAP
 Cohesion: 0.17
 Nodes (15): _decode_header(), _ensure_owner_scoped_email_cache_table(), _init_scheduled_db(), Rebuild legacy Message-ID-only cache tables with owner in the PK., action_check_email_urgency(), action_daily_brief(), Scan unread emails across all accounts, LLM-triage new ones, cache per-UID…, Build a short morning digest: today's calendar events, unread email count +… (+7 more)
 
-### Community 243 - "personal_routes.py"
-Cohesion: 0.19
-Nodes (13): _personal_upload_dir_for_owner(), Return the per-owner upload directory used for direct RAG uploads., Build a collision-resistant upload path while preserving a display name., Setup personal documents related routes. Args: personal_docs_manager:…, setup_personal_routes(), _unique_personal_upload_path(), get_rag_manager(), RAG singleton instance for the application. (+5 more)
+### Community 243 - "app.py"
+Cohesion: 0.04
+Nodes (77): get_version(), health_check(), invalid_file_upload_handler(), _is_auth_exempt(), _is_trusted_loopback(), _lifespan(), llm_service_error_handler(), get (+69 more)
 
 ### Community 244 - "copilot.py"
 Cohesion: 0.17
@@ -1797,9 +1791,9 @@ Nodes (15): node_available(), fixture, Pin pure helpers in the compare/ frontend
 Cohesion: 0.14
 Nodes (15): Ollama, opencode (anomalyco/opencode), dev branch, ChromaDB Native Service Setup PR Doc, CI Workflow (.github/workflows/ci.yml), odysseus-chromadb.service (systemd unit), odysseus-ui.service (systemd unit), Agent Feature (+7 more)
 
-### Community 251 - "EditorDraft"
-Cohesion: 0.24
-Nodes (14): EditorDraft, Persisted in-progress gallery-editor session — layered project state that the…, EditorDraft, DraftCreate, DraftUpdate, _load_payload(), _owns(), Any (+6 more)
+### Community 251 - "TimestampMixin"
+Cohesion: 0.09
+Nodes (29): EditorDraft, Integration, An external service connection (email, RSS, webhook, etc.)., Mixin that adds timestamp fields to models, User-saved visual signatures (image stamps). Reusable across PDF form filling,…, Persisted in-progress gallery-editor session — layered project state that the…, Signature, TimestampMixin (+21 more)
 
 ### Community 252 - "test_hwfit_manual_backend.py"
 Cohesion: 0.20
@@ -1821,9 +1815,9 @@ Nodes (15): closeCalendar(), _collapseSidebar(), _doCloseCalendar(), _fetchCalen
 Cohesion: 0.26
 Nodes (3): createLoadingRow(), createWhirlpool(), Spinner
 
-### Community 257 - "resolve"
-Cohesion: 0.15
-Nodes (8): Compiler, create_indent(), element(), Formatter, h2(), ImageReplacer, resolve(), StructuredDocumentTagContent
+### Community 257 - "_resolve_mcp_oauth_path"
+Cohesion: 0.16
+Nodes (16): _apply_mcp_oauth_env(), _mcp_oauth_base_dir(), _mcp_oauth_token_missing(), Path, Directory that may contain OAuth files managed by Odysseus., Resolve an MCP OAuth path and keep it under DATA_DIR/mcp_oauth., Return an OAuth config copy with file paths confined to mcp_oauth., Check token existence without letting legacy bad paths break listing. (+8 more)
 
 ### Community 258 - "test_llm_core_temperature.py"
 Cohesion: 0.21
@@ -1899,7 +1893,7 @@ Nodes (12): APIRouter, setup_research_routes(), Route-level owner-scope tests fo
 
 ### Community 276 - "slugify"
 Cohesion: 0.27
-Nodes (12): BaseModel, SkillAddRequest, SkillUpdateRequest, Convert a free-form title to a kebab-case slug suitable for a directory     name, slugify(), asyncio, Path, _request() (+4 more)
+Nodes (12): BaseModel, SkillAddRequest, SkillUpdateRequest, Convert a free-form title to a kebab-case slug suitable for a directory name.…, slugify(), asyncio, Path, _request() (+4 more)
 
 ### Community 277 - "_entry_from_modelinfo"
 Cohesion: 0.24
@@ -2043,15 +2037,15 @@ Nodes (10): _build_parser(), _builtin_preset_names(), cmd_export(), cmd_get(), c
 
 ### Community 312 - "rank_image_models"
 Cohesion: 0.27
-Nodes (8): get_image_models(), rank_image_models(), Image generation model registry and VRAM fitting for Cookbook., Return the image model registry., Score and rank image models against detected hardware.      Returns list of mode, test_rank_image_models_handles_non_dict_system(), test_rank_image_models_handles_non_string_search(), test_rank_image_models_string_filter_still_applies()
+Nodes (8): get_image_models(), rank_image_models(), Image generation model registry and VRAM fitting for Cookbook., Return the image model registry., Score and rank image models against detected hardware. Returns list of models…, test_rank_image_models_handles_non_dict_system(), test_rank_image_models_handles_non_string_search(), test_rank_image_models_string_filter_still_applies()
 
 ### Community 313 - "skills.py"
 Cohesion: 0.25
-Nodes (8): _jaccard(), Coerce a possibly hand-edited frontmatter value to float without     raising — a, _to_float(), _tokenize(), Regression: skill retrieval must match tags as whole tokens, not substrings., _skill(), test_tag_substring_does_not_boost(), test_tag_whole_token_still_boosts()
+Nodes (8): _jaccard(), Coerce a possibly hand-edited frontmatter value to float without raising — a…, _to_float(), _tokenize(), Regression: skill retrieval must match tags as whole tokens, not substrings., _skill(), test_tag_substring_does_not_boost(), test_tag_whole_token_still_boosts()
 
 ### Community 314 - "ShellService"
 Cohesion: 0.24
-Nodes (6): Result of a shell command., Shell execution service.      Usage:         service = ShellService()         re, Execute a shell command.          Args:             command: Shell command to ru, Execute a command and stream output.          Yields:             {"stream": "st, ShellResult, ShellService
+Nodes (6): Result of a shell command., Shell execution service. Usage: service = ShellService() result = await…, Execute a shell command. Args: command: Shell command to run timeout: Timeout…, Execute a command and stream output. Yields: {"stream": "stdout"|"stderr",…, ShellResult, ShellService
 
 ### Community 315 - "app_helpers.py"
 Cohesion: 0.24
@@ -2089,9 +2083,9 @@ Nodes (9): _extract_handler_body(), _handler(), parametrize, skipif, Behavioral 
 Cohesion: 0.45
 Nodes (10): asyncio, _raise(), Tests for ResearchHandler.synthesize_query topic/fallback selection. Deep…, _session(), test_bare_yes_falls_back_to_original_ask(), test_continuation_phrase_falls_back_to_original_ask(), test_multiword_followup_uses_synthesis(), test_short_country_answer_is_kept() (+2 more)
 
-### Community 324 - "test_skill_index_prompt_injection.py"
-Cohesion: 0.25
-Nodes (10): _patch_prefs(), Path, Regression test for the skill INDEX path in src/agent_loop.py. The original…, The malicious skill description in the INDEX must not land in the trusted…, The skill INDEX, when non-empty, must produce an untrusted user-role message…, Write a skill whose description is malicious, then return the data dir. The…, Mirror the helpers from test_skill_prompt_injection.py: point…, _seed_index_skill() (+2 more)
+### Community 324 - "search-chat.js"
+Cohesion: 0.30
+Nodes (14): closeSearch(), el(), formatTimestamp(), handleInput(), handleKeydown(), highlightMatch(), init(), isOpen() (+6 more)
 
 ### Community 325 - "package.json"
 Cohesion: 0.20
@@ -2249,25 +2243,25 @@ Nodes (7): add_column_sqlite(), check_column_exists(), update_database.py This s
 Cohesion: 0.43
 Nodes (7): _native_quant(), _native_quant must emit canonical quant labels that key the cost maps.…, test_awq_no_digit_falls_back_to_canonical(), test_awq_with_digit_is_canonical(), test_gptq_fallback_label_is_in_maps(), test_gptq_int4_label_is_canonical(), test_gptq_int8_label_is_canonical()
 
-### Community 370 - "extract_statistics"
-Cohesion: 0.36
-Nodes (7): extract_statistics(), Find numbers, percentages, dates and simple measurements., Tests for extract_statistics (src/search/content.py)., test_captures_comma_less_large_number(), test_comma_grouped_number(), test_four_digit_year_captured(), test_keeps_percent_sign()
+### Community 370 - "workspace.js"
+Cohesion: 0.33
+Nodes (13): KEYS, _basename(), clearWorkspace(), closeWorkspaceBrowser(), _getModal(), getWorkspace(), initWorkspace(), _load() (+5 more)
 
-### Community 371 - "event_bus.py"
-Cohesion: 0.29
-Nodes (7): _handle_event(), event_bus.py Lightweight event bus for triggering automation tasks based on…, Wire up the scheduler reference (called from app.py on startup)., Resolve ownerless app events to the primary configured user. Some event sources…, Process an event: increment counters, fire tasks that hit their threshold., _resolve_event_owner(), set_task_scheduler()
+### Community 371 - "_checkReminders"
+Cohesion: 0.22
+Nodes (9): _advanceRecurring(), _checkReminders(), _formatRepeatLabel(), _initReminders(), _loadFiredReminders(), _normalizeRepeat(), _saveFiredReminders(), _startReminderLoop() (+1 more)
 
 ### Community 372 - "check_readiness"
 Cohesion: 0.36
 Nodes (6): check_readiness(), Ithaca anchor — local-instance readiness / integrity self-check. Beyond…, Run the readiness checks and return a JSON-serialisable report. ``ready`` is…, Tests for the readiness / integrity self-check (src/readiness.py)., test_local_first_check_is_informational_never_fatal(), test_readiness_reports_core_subsystems()
 
-### Community 373 - "rag.js"
-Cohesion: 0.43
-Nodes (7): _deleteFile(), _humanSize(), init(), loadPersonalDocs(), ragModule, _setupUploadZone(), uploadRagFiles()
+### Community 373 - "test_archived_sessions_model_filter.py"
+Cohesion: 0.42
+Nodes (8): archived_endpoint(), fixture, Archive browser model filter must be a CONTAINS match, not suffix-only.…, _route(), _seed(), test_contains_match_returns_all_models_sharing_the_substring(), test_exact_full_model_still_matches(), test_wildcard_in_filter_is_escaped()
 
-### Community 374 - "search.js"
-Cohesion: 0.32
-Nodes (5): _fetchProvider(), init(), _labels, refresh(), searchModule
+### Community 374 - "extract_quotes"
+Cohesion: 0.36
+Nodes (7): extract_quotes(), Return quoted excerpts that are at least 15 characters long., Tests for extract_quotes (src/search/content.py)., test_matched_double_quotes(), test_matched_single_quotes(), test_mismatched_quotes_are_not_extracted(), test_short_quotes_ignored()
 
 ### Community 375 - "test_agent_rounds_exhausted.py"
 Cohesion: 0.46
@@ -2284,10 +2278,6 @@ Nodes (7): skipif, Pin the pure splitTableRow helper (static/js/markdown/tableRo
 ### Community 381 - "test_owned_document_query.py"
 Cohesion: 0.32
 Nodes (5): _Doc, _FakeQuery, Tests for _owned_document_query owner scoping (src/tool_implementations.py)., test_owner_none_does_not_pass_python_false(), test_owner_set_filters_by_owner()
-
-### Community 382 - "test_rename_user_case_insensitive.py"
-Cohesion: 0.32
-Nodes (6): _fresh_auth_manager(), skipif, Regression: username rename must migrate mixed-case legacy owner keys. Before…, _real_core_package(), test_rename_owner_db_filter_is_case_insensitive(), test_rename_user_updates_mixed_case_session_username()
 
 ### Community 383 - "test_rename_user_token_cache.py"
 Cohesion: 0.32
@@ -2579,7 +2569,7 @@ Nodes (3): _common.py Shared constants and helpers for built-in MCP servers., Tr
 
 ### Community 468 - "classify_amd_gfx"
 Cohesion: 0.50
-Nodes (4): classify_amd_gfx(), Map an AMD ISA target (e.g. "gfx1200") to (gfx, family).      family is one of:, classify_amd_gfx maps gfx targets to the right family: consumer RDNA…, test_classify_amd_gfx_rdna_vs_cdna()
+Nodes (4): classify_amd_gfx(), Map an AMD ISA target (e.g. "gfx1200") to (gfx, family). family is one of:…, classify_amd_gfx maps gfx targets to the right family: consumer RDNA…, test_classify_amd_gfx_rdna_vs_cdna()
 
 ### Community 469 - "_generateSummary"
 Cohesion: 0.67
@@ -2673,11 +2663,11 @@ Nodes (3): UploadFile, Validate uploaded file meets requirements., validate_file
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `llm_call_async()` connect `llm_call_async` to `app.py`, `strip_think`, `calendar_routes.py`, `model_routes.py`, `test_cookbook_helpers.py`, `Session`, `email_routes.py`, `document_routes.py`, `TaskScheduler`, `get_setting`, `chat_routes.py`, `session_routes.py`, `test_memory_extractor_vector_cross_tenant.py`, `deep_research.py`, `ResearchHandler`, `ScheduledTask`, `get_current_user`, `BaseModel`, `DeepResearcher`, `_build_anthropic_payload`, `action_consolidate_memory`, `memory_extractor.py`, `resolve_endpoint`, `_format_upstream_error`, `skills_routes.py`?**
+- **Why does `llm_call_async()` connect `llm_call_async` to `McpManager`, `strip_think`, `calendar_routes.py`, `ChatMessage`, `model_routes.py`, `test_cookbook_helpers.py`, `Session`, `email_routes.py`, `document_routes.py`, `TaskScheduler`, `get_setting`, `chat_routes.py`, `test_memory_extractor_vector_cross_tenant.py`, `deep_research.py`, `ResearchHandler`, `ScheduledTask`, `get_current_user`, `BaseModel`, `DeepResearcher`, `stream_agent_loop`, `action_consolidate_memory`, `memory_extractor.py`, `resolve_endpoint`, `_format_upstream_error`, `skills_routes.py`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **Why does `resolve()` connect `resolve` to `docx.umd.min.js`, `cookbookServe.js`, `isObject`, `switchToDoc`, `emailLibrary.js`, `sessions.js`, `require_stream_readable`, `applyMdFormat`, `_renderMainView`, `.value`, `skills.js`, `.push`?**
+- **Why does `resolve()` connect `.push` to `docx.umd.min.js`, `cookbookServe.js`, `isObject`, `switchToDoc`, `emailLibrary.js`, `sessions.js`, `require_stream_readable`, `applyMdFormat`, `_renderMainView`, `.value`, `skills.js`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **Why does `TaskScheduler` connect `TaskScheduler` to `app.py`, `ResearchHandler`, `calendar_routes.py`, `ChatMessage`, `model_routes.py`, `test_auth_regressions.py`, `Session`, `_send_smtp_message`, `ScheduledTask`, `DeepResearcher`, `get_current_user`?**
+- **Why does `TaskScheduler` connect `TaskScheduler` to `McpManager`, `ResearchHandler`, `calendar_routes.py`, `ChatMessage`, `model_routes.py`, `test_auth_regressions.py`, `Session`, `_send_smtp_message`, `app.py`, `ScheduledTask`, `DeepResearcher`, `get_current_user`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Are the 93 inferred relationships involving `emit()` (e.g. with `cmd_list()` and `cmd_restore()`) actually correct?**
   _`emit()` has 93 INFERRED edges - model-reasoned connections that need verification._
