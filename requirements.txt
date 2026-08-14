@@ -43,3 +43,14 @@ qrcode[pil]
 croniter
 pytest
 pytest-asyncio
+# KR suggested additions below
+pytest-playwright
+# For running local models. [llmfit, vllm, huggingface, tmux] 
+# Authenticate with huggingface token to speed up the slow file downloads (create your free token from their website)
+# Run`hf auth login` or using an environment variable `hf auth login --token $HUGGINGFACE_TOKEN`
+# Optionally add termux-ai or termux-mcp. Might be useful for agents
+# huggingface-hub
+termux 
+llmfit
+vllm
+
